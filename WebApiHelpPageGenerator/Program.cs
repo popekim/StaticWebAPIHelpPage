@@ -6,6 +6,7 @@ using System.Web.Http.Description;
 using CommandLine;
 using WebApiHelpPage;
 using WebApiHelpPage.Models;
+using System.IO;
 
 namespace WebApiHelpPageGenerator
 {
@@ -22,6 +23,11 @@ namespace WebApiHelpPageGenerator
 
                     string assemblyPath = options.AssemblyPath;
                     HttpConfiguration config = HttpConfigurationImporter.ImportConfiguration(assemblyPath);
+                    if (!string.IsNullOrWhiteSpace(options.XmlDocumentPath))
+                    {
+                        var documentPath = Path.Combine(Environment.CurrentDirectory, options.XmlDocumentPath);
+                        config.SetDocumentationProvider(new XmlDocumentationProvider(documentPath));
+                    }
                     config.EnsureInitialized();
                     Collection<ApiDescription> descriptions = config.Services.GetApiExplorer().ApiDescriptions;
                     IOutputGenerator outputGenerator = LoadOutputGenerator(options);

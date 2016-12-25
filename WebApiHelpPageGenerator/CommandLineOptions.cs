@@ -8,6 +8,9 @@ namespace WebApiHelpPageGenerator
         [Option("p", null, Required = true, HelpText = "Path to the assembly where the Web APIs are defined.")]
         public string AssemblyPath { get; set; }
 
+        [Option("x", null, HelpText = "Path to the xml documentation file.")]
+        public string XmlDocumentPath { get; set; }
+
         [OptionArray("r", null, DefaultValue = new string[0], HelpText = "Additional assembly references.")]
         public string[] References { get; set; }
 
