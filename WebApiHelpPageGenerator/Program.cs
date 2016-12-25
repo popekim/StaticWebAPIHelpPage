@@ -22,6 +22,7 @@ namespace WebApiHelpPageGenerator
 
                     string assemblyPath = options.AssemblyPath;
                     HttpConfiguration config = HttpConfigurationImporter.ImportConfiguration(assemblyPath);
+                    config.EnsureInitialized();
                     Collection<ApiDescription> descriptions = config.Services.GetApiExplorer().ApiDescriptions;
                     IOutputGenerator outputGenerator = LoadOutputGenerator(options);
 
