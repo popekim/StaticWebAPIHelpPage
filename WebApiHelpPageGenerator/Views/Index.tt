@@ -9,7 +9,7 @@
 <#
 	var title = "ASP.NET Web API Help Page";
     // Group APIs by controller
-    ILookup<string, ApiDescription> apiGroups = Model.ToLookup(api => api.ActionDescriptor.ControllerDescriptor.ControllerName);
+	ILookup<HttpControllerDescriptor, ApiDescription> apiGroups = Model.ToLookup(api => api.ActionDescriptor.ControllerDescriptor);
 #>
 
 <html>
@@ -37,7 +37,7 @@
         </div>
     </section>
     <section class="content-wrapper main-content clear-fix">
-        <# foreach (IGrouping<string, ApiDescription> controllerGroup in apiGroups)
+        <# foreach (var controllerGroup in apiGroups)
 		{ #>
             <#@ include file="DisplayTemplates\ApiGroup.tt" #>
         <# } #>

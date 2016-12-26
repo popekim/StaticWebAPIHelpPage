@@ -37,7 +37,7 @@ namespace WebApiHelpPage
 
 	var title = "ASP.NET Web API Help Page";
     // Group APIs by controller
-    ILookup<string, ApiDescription> apiGroups = Model.ToLookup(api => api.ActionDescriptor.ControllerDescriptor.ControllerName);
+	ILookup<HttpControllerDescriptor, ApiDescription> apiGroups = Model.ToLookup(api => api.ActionDescriptor.ControllerDescriptor);
 
             
             #line default
@@ -95,30 +95,65 @@ namespace WebApiHelpPage
         ");
             
             #line 40 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\Index.tt"
- foreach (IGrouping<string, ApiDescription> controllerGroup in apiGroups)
+ foreach (var controllerGroup in apiGroups)
 		{ 
             
             #line default
             #line hidden
             this.Write("            ");
-            this.Write("<h2 id=\"");
             
             #line 1 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(controllerGroup.Key));
+
+    var controllerDocumentation = DocumentationProvider != null ? 
+        DocumentationProvider.GetDocumentation(controllerGroup.Key) : 
+        null;
+
+            
+            #line default
+            #line hidden
+            this.Write("\r\n<h2 id=\"");
+            
+            #line 7 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(controllerGroup.Key.ControllerName));
             
             #line default
             #line hidden
             this.Write("\">");
             
-            #line 1 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(controllerGroup.Key));
+            #line 7 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(controllerGroup.Key.ControllerName));
             
             #line default
             #line hidden
-            this.Write("</h2>\r\n<table class=\"help-page-table\">\r\n\t<thead>\r\n\t\t<tr><th>API</th><th>Descripti" +
-                    "on</th></tr>\r\n\t</thead>\r\n\t<tbody class=\"ui-widget-content\">\r\n\t");
+            this.Write("</h2>\r\n");
             
-            #line 7 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
+            #line 8 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
+if (!String.IsNullOrEmpty(controllerDocumentation))
+{
+
+            
+            #line default
+            #line hidden
+            this.Write("    <p>");
+            
+            #line 11 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(controllerDocumentation));
+            
+            #line default
+            #line hidden
+            this.Write("</p>\r\n");
+            
+            #line 12 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
+
+}
+
+            
+            #line default
+            #line hidden
+            this.Write("\r\n<table class=\"help-page-table\">\r\n\t<thead>\r\n\t\t<tr><th>API</th><th>Description</t" +
+                    "h></tr>\r\n\t</thead>\r\n\t<tbody class=\"ui-widget-content\">\r\n\t");
+            
+            #line 21 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
  foreach (var api in controllerGroup)
 	{ 
             
@@ -126,28 +161,28 @@ namespace WebApiHelpPage
             #line hidden
             this.Write("\t\t<tr>\r\n\t\t\t<td class=\"api-name\"><a href=\"");
             
-            #line 10 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
+            #line 24 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ApiLinkFactory(api.GetFriendlyId())));
             
             #line default
             #line hidden
             this.Write("\">");
             
-            #line 10 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
+            #line 24 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(api.HttpMethod.Method));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 10 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
+            #line 24 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(api.RelativePath));
             
             #line default
             #line hidden
             this.Write("</a></td>\r\n\t\t\t<td class=\"api-documentation\">\r\n\t\t\t");
             
-            #line 12 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
+            #line 26 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
  if (api.Documentation != null)
 			{ 
             
@@ -155,14 +190,14 @@ namespace WebApiHelpPage
             #line hidden
             this.Write("\t\t\t\t<p>");
             
-            #line 14 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
+            #line 28 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(api.Documentation));
             
             #line default
             #line hidden
             this.Write("</p>\r\n\t\t\t");
             
-            #line 15 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
+            #line 29 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
  }
 			else
 			{ 
@@ -171,14 +206,14 @@ namespace WebApiHelpPage
             #line hidden
             this.Write("\t\t\t\t<p>No documentation available.</p>\r\n\t\t\t");
             
-            #line 19 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
+            #line 33 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t\t\t</td>\r\n\t\t</tr>\r\n\t");
             
-            #line 22 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
+            #line 36 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ApiGroup.tt"
  } 
             
             #line default

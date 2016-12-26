@@ -6,7 +6,7 @@ namespace WebApiHelpPageGenerator
 {
     public interface IOutputGenerator
     {
-        void GenerateIndex(Collection<ApiDescription> apis);
+        void GenerateIndex(Collection<ApiDescription> apis, IDocumentationProvider documentationProvider);
 
         void GenerateApiDetails(HelpPageApiModel apiModel);
     }

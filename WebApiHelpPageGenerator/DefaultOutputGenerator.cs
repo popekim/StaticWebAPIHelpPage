@@ -11,11 +11,12 @@ namespace WebApiHelpPageGenerator
     {
         private const string fileName = "HelpPage.html";
 
-        public void GenerateIndex(Collection<ApiDescription> apis)
+        public void GenerateIndex(Collection<ApiDescription> apis, IDocumentationProvider documentationProvider)
         {
             Index indexTemplate = new Index
             {
                 Model = apis,
+                DocumentationProvider = documentationProvider,
                 ApiLinkFactory = apiName =>
                 {
                     return apiName + ".html";
@@ -30,7 +31,7 @@ namespace WebApiHelpPageGenerator
             Api apiTemplate = new Api
             {
                 Model = apiModel,
-                HomePageLink = fileName
+                HomePageLink = fileName,
             };
             string helpPage = apiTemplate.TransformText();
             WriteFile(apiModel.ApiDescription.GetFriendlyId() + ".html", helpPage);

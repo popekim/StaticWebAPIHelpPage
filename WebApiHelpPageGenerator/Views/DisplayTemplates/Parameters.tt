@@ -1,37 +1,33 @@
-<#
-    Collection<ApiParameterDescription> parameters = Model.ApiDescription.ParameterDescriptions;
-#>
 <table class="help-page-table">
     <thead>
-    <tr><th>Name</th><th>Description</th><th>Additional information</th></tr>
+		<tr><th>Name</th><th>Description</th><th>Type</th><th>Additional information</th></tr>
     </thead>
     <tbody>
-    <# foreach (ApiParameterDescription parameter in parameters)
+    <# foreach (ParameterDescription parameter in parameters)
     {
-        string parameterDocumentation = parameter.Documentation != null ?
-            parameter.Documentation :
-            "No documentation available.";
-    
+		ModelDescription modelDescription = parameter.TypeDescription;
+		string parameterDocumentation = parameter.Documentation != null ?
+            parameter.Documentation : "No documentation available.";
+
         // Don't show CancellationToken because it's a special parameter
-        if (!typeof(CancellationToken).IsAssignableFrom(parameter.ParameterDescriptor.ParameterType))
+        if (!typeof(CancellationToken).IsAssignableFrom(parameter.TypeDescription.ModelType))
         { #>
             <tr>
                 <td><b><#=parameter.Name#></b></td>
                 <td><pre><#=parameterDocumentation#></pre></td>
+				<td><#=modelDescription.Name#></td>
                 <td>
-                    <# switch (parameter.Source)
+                    <#if (parameter.Annotations.Count > 0)
                     {
-                        case ApiParameterSource.FromBody: #>
-                            <p>Define this parameter in the request <b>body</b>.</p>
-                            <# break;
-                        case ApiParameterSource.FromUri: #>
-                            <p>Define this parameter in the request <b>URI</b>.</p>
-                            <# break;
-                        case ApiParameterSource.Unknown:
-                        default: #>
-                            <p>None.</p>
-                            <# break;
-                    } #>
+						foreach (var annotation in parameter.Annotations)
+                        {#>
+							<p><#=annotation.Documentation#></p>
+                        <#}
+                    }
+                    else
+                    {#>
+						<p>None.</p>
+                    <#}#>
                 </td>
             </tr>
         <# } 

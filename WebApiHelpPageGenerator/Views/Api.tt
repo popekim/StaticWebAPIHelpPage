@@ -3,6 +3,7 @@
 <#@ import namespace="System.Web.Http.Controllers" #>
 <#@ import namespace="System.Collections.ObjectModel" #>
 <#@ import namespace="WebApiHelpPage.Models" #>
+<#@ import namespace="WebApiHelpPage.ModelDescriptions" #>
 <#@ import namespace="System.Web.Http" #>
 <#@ import namespace="System.Web" #>
 <#@ import namespace="System.Linq" #>

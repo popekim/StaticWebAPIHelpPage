@@ -1,7 +1,7 @@
 ﻿using CommandLine;
 using CommandLine.Text;
 
-namespace WebApiHelpPageGenerator
+namespace WebApiHelpPage
 {
     internal class CommandLineOptions : CommandLineOptionsBase
     {

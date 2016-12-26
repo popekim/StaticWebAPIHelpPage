@@ -1,7 +1,10 @@
 <#
+	bool hasUriParameters = Model.UriParameters.Count > 0;
     bool hasParameters = description.ParameterDescriptions.Count > 0;
     bool hasRequestSamples = Model.SampleRequests.Count > 0;
     bool hasResponseSamples = Model.SampleResponses.Count > 0;
+	bool hasRequestModelDescription = Model.RequestModelDescription != null;
+	bool hasRequestBodyParametres = Model.RequestBodyParameters != null;
 #>
 <h1><#=description.HttpMethod.Method#> <#=description.RelativePath#></h1>
 <div>
@@ -14,27 +17,69 @@
         <p>No documentation available.</p>
     <# } #>
 
-    <# if (hasParameters || hasRequestSamples)
-    { #>
-        <h2>Request Information</h2>
-        <# if (hasParameters)
-        { #>
-            <h3>Parameters</h3>
-            <#@ include file="DisplayTemplates\Parameters.tt" #>
-        <# } 
-        if (hasRequestSamples)
-        { #>
-            <h3>Request body formats</h3>
+	<# if (hasUriParameters || hasRequestModelDescription)
+	{#>
+		<h2>Request Information</h2>
+		<h3>URI Parameters</h3>
+		<# if (hasUriParameters)
+		{ 
+			var parameters = Model.UriParameters;
+			#>
+			<#@ include file="DisplayTemplates\Parameters.tt" #>
+		<#
+		}
+		#>
+		<h3>Body Parameters</h3>
+		<#
+		if (Model.RequestDocumentation != null)
+		{#>
+			<p><#=Model.RequestDocumentation#></p>
+		<#
+		}#>
+		
+		<#
+		if (hasRequestModelDescription)
+		{  
+			if (hasRequestBodyParametres)
+			{ #>
+				<#var parameters = Model.RequestBodyParameters;#>
+				<#@ include file="DisplayTemplates\Parameters.tt" #>
+			<#
+			} 
+		}
+		else
+		{#>
+			<p>None.</p>
+		<#
+		}
+
+		if (hasRequestSamples)
+		{ #>
+			<h3>Request Formats</h3>
 			<# var ModelSamples = Model.SampleRequests; #>
 			<#@ include file="DisplayTemplates\Samples.tt" #>
-        <# }
-    } #> 
-       
-    <# if (hasResponseSamples)
+		<#
+		}
+	}#>
+	
+	<h2>Response Information</h2>
+
+    <h3>Resource Description</h3>
+    <# if (description.ResponseDescription.Documentation != null)
+	{#>
+		<p><#=description.ResponseDescription.Documentation#></p>
+	<#
+	}
+	else
+	{#>
+		<p>None.</p>
+	<#
+	}#>
+    
+	<#
+	if (hasResponseSamples)
     { #>     
-        <h2>Response Information</h2> 
-        <h3>Response body formats</h3>
 		<# var ModelSamples = Model.SampleResponses; #>
 		<#@ include file="DisplayTemplates\Samples.tt" #>
-    <# } #>
+    <# }#>
 </div>

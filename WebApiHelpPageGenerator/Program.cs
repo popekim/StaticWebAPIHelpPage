@@ -23,21 +23,22 @@ namespace WebApiHelpPageGenerator
 
                     string assemblyPath = options.AssemblyPath;
                     HttpConfiguration config = HttpConfigurationImporter.ImportConfiguration(assemblyPath);
+                    IDocumentationProvider documentationProvider = null;
                     if (!string.IsNullOrWhiteSpace(options.XmlDocumentPath))
                     {
                         var documentPath = Path.Combine(Environment.CurrentDirectory, options.XmlDocumentPath);
-                        config.SetDocumentationProvider(new XmlDocumentationProvider(documentPath));
+                        documentationProvider = new XmlDocumentationProvider(documentPath);
+                        config.SetDocumentationProvider(documentationProvider);
                     }
                     config.EnsureInitialized();
                     Collection<ApiDescription> descriptions = config.Services.GetApiExplorer().ApiDescriptions;
                     IOutputGenerator outputGenerator = LoadOutputGenerator(options);
 
-                    outputGenerator.GenerateIndex(descriptions);
+                    outputGenerator.GenerateIndex(descriptions, documentationProvider);
 
                     foreach (var api in descriptions)
                     {
-                        HelpPageSampleGenerator sampleGenerator = config.GetHelpPageSampleGenerator();
-                        HelpPageApiModel apiModel = HelpPageConfigurationExtensions.GenerateApiModel(api, sampleGenerator);
+                        HelpPageApiModel apiModel = HelpPageConfigurationExtensions.GenerateApiModel(api, config);
                         if (apiModel != null)
                         {
                             outputGenerator.GenerateApiDetails(apiModel);

@@ -1,4 +1,18 @@
-<h2 id="<#=controllerGroup.Key#>"><#=controllerGroup.Key#></h2>
+<#
+    var controllerDocumentation = DocumentationProvider != null ? 
+        DocumentationProvider.GetDocumentation(controllerGroup.Key) : 
+        null;
+#>
+
+<h2 id="<#=controllerGroup.Key.ControllerName#>"><#=controllerGroup.Key.ControllerName#></h2>
+<#if (!String.IsNullOrEmpty(controllerDocumentation))
+{
+#>
+    <p><#=controllerDocumentation#></p>
+<#
+}
+#>
+
 <table class="help-page-table">
 	<thead>
 		<tr><th>API</th><th>Description</th></tr>

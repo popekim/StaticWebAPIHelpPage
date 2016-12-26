@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web.Http.Description;
+using WebApiHelpPage.Models;
 using WebApiHelpPageGenerator;
 
 namespace WebApiJsClientGenerator
 {
     public class JsClientGenrator : IOutputGenerator
     {
-        public void GenerateApiDetails(WebApiHelpPage.Models.HelpPageApiModel apiModel)
+        public void GenerateApiDetails(HelpPageApiModel apiModel)
         {
         }
 
-        public void GenerateIndex(System.Collections.ObjectModel.Collection<System.Web.Http.Description.ApiDescription> apis)
+        public void GenerateIndex(System.Collections.ObjectModel.Collection<ApiDescription> apis, IDocumentationProvider documentationProvider)
         {
             JsClientTemplate jsClientTemplate = new JsClientTemplate
             {

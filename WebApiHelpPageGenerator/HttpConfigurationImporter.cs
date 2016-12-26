@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Http;
 
-namespace WebApiHelpPageGenerator
+namespace WebApiHelpPage
 {
     public static class HttpConfigurationImporter
     {
