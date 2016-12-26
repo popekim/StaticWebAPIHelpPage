@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Web.Http.Description;
 using WebApiHelpPage;
 using WebApiHelpPage.ModelDescriptions;
@@ -17,7 +18,7 @@ namespace WebApiHelpPageGenerator
         {
             Index indexTemplate = new Index
             {
-                Model = apis,
+                Model = apis.OrderBy(api => api.ActionDescriptor.ControllerDescriptor.ControllerName),
                 DocumentationProvider = documentationProvider,
                 ApiLinkFactory = apiName =>
                 {

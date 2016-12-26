@@ -403,6 +403,7 @@ namespace WebApiHelpPage
             {
                 return new Dictionary<Type, Func<long, object>>
                 {
+                    { typeof(void), index => "" },
                     { typeof(Boolean), index => true },
                     { typeof(Byte), index => (Byte)64 },
                     { typeof(Char), index => (Char)65 },

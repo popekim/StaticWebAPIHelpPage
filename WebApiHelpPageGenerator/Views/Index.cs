@@ -37,7 +37,7 @@ namespace WebApiHelpPage
 
 	var title = "ASP.NET Web API Help Page";
     // Group APIs by controller
-	ILookup<HttpControllerDescriptor, ApiDescription> apiGroups = Model.ToLookup(api => api.ActionDescriptor.ControllerDescriptor);
+	var apiGroups = Model.ToLookup(api => api.ActionDescriptor.ControllerDescriptor);
 
             
             #line default
