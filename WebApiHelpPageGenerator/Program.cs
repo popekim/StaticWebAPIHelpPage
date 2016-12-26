@@ -45,7 +45,7 @@ namespace WebApiHelpPageGenerator
 
                             if (apiModel.ResourceDescription != null)
                             {
-                                outputGenerator.GenerateResourceModel(apiModel);
+                                outputGenerator.GenerateResourceModel(apiModel.ResourceDescription);
                             }
                         }
                     }

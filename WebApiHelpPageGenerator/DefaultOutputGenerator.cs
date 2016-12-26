@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Web.Http.Description;
@@ -42,16 +43,58 @@ namespace WebApiHelpPageGenerator
             WriteFile(apiModel.ApiDescription.GetFriendlyId() + ".html", helpPage);
         }
 
-        public void GenerateResourceModel(HelpPageApiModel apiModel)
+        private HashSet<string> _processedResources = new HashSet<string>();
+        public void GenerateResourceModel(ModelDescription modelDescription)
         {
-            var resourceModelTemplate = new ResourceModel
-            {
-                Model = apiModel,
-                HomePageLink = fileName,
-            };
+            string modelDescriptionName = modelDescription.Name;
 
-            string helpPage = resourceModelTemplate.TransformText();
-            WriteFile($"RES-{apiModel.ResourceDescription.Name}.html", helpPage);
+            if (_processedResources.Contains(modelDescriptionName))
+            {
+                return;
+            }
+
+            _processedResources.Add(modelDescriptionName);
+
+            if (modelDescription is EnumTypeModelDescription)
+            {
+                var resourceModelTemplate = new EnumModel
+                {
+                    Model = modelDescription as EnumTypeModelDescription,
+                    HomePageLink = fileName,
+                };
+
+                string helpPage = resourceModelTemplate.TransformText();
+                WriteFile($"RES-{modelDescriptionName}.html", helpPage);
+
+                return;
+            }
+
+            if (modelDescription is ComplexTypeModelDescription || modelDescription is CollectionModelDescription)
+            {
+                var parameters = HelpPageApiModel.GetParameterDescriptions(modelDescription);
+
+                if (parameters != null && parameters.Count > 0)
+                {
+                    var resourceModelTemplate = new ResourceModel
+                    {
+                        Model = modelDescription,
+                        Parameters = parameters,
+                        HomePageLink = fileName,
+                        ResourceModelLinkFactory = resourceModelName =>
+                        {
+                            return resourceModelName + ".html";
+                        }
+                    };
+
+                    string helpPage = resourceModelTemplate.TransformText();
+                    WriteFile($"RES-{modelDescriptionName}.html", helpPage);
+
+                    foreach (var property in resourceModelTemplate.Parameters)
+                    {
+                        GenerateResourceModel(property.TypeDescription);
+                    }
+                }
+            }
         }
 
         private static void WriteFile(string fileName, String pageContent)

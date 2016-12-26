@@ -27,9 +27,9 @@ namespace WebApiHelpPage
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\ResourceModel.tt"
+    #line 1 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\EnumModel.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "14.0.0.0")]
-    public partial class ResourceModel : ResourceModelBase
+    public partial class EnumModel : EnumModelBase
     {
 #line hidden
         /// <summary>
@@ -38,7 +38,7 @@ namespace WebApiHelpPage
         public virtual string TransformText()
         {
             
-            #line 14 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\ResourceModel.tt"
+            #line 14 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\EnumModel.tt"
 
 	var modelDesc = Model;
     var title = modelDesc.Name;
@@ -48,7 +48,7 @@ namespace WebApiHelpPage
             #line hidden
             this.Write("\r\n<html>\r\n<head>\r\n    <title>");
             
-            #line 21 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\ResourceModel.tt"
+            #line 21 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\EnumModel.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(title));
             
             #line default
@@ -77,21 +77,21 @@ namespace WebApiHelpPage
             this.Write("\r\n\t</style>\r\n</head>\r\n<body>\r\n<div id=\"body\">\r\n   <section class=\"featured\">\r\n   " +
                     "     <div class=\"content-wrapper\">\r\n            <p>\r\n                <a href=\"");
             
-            #line 31 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\ResourceModel.tt"
+            #line 31 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\EnumModel.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(HomePageLink));
             
             #line default
             #line hidden
             this.Write("\">Help Page Home</a>\r\n            </p>\r\n        </div>\r\n    </section>\r\n    <h1>");
             
-            #line 35 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\ResourceModel.tt"
+            #line 35 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\EnumModel.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelDesc.Name));
             
             #line default
             #line hidden
             this.Write("</h1>\r\n\t");
             
-            #line 36 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\ResourceModel.tt"
+            #line 36 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\EnumModel.tt"
 if (modelDesc.Documentation != null)
 	{
             
@@ -99,191 +99,83 @@ if (modelDesc.Documentation != null)
             #line hidden
             this.Write("\t\t<p>");
             
-            #line 38 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\ResourceModel.tt"
+            #line 38 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\EnumModel.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelDesc.Documentation));
             
             #line default
             #line hidden
             this.Write("</p>\r\n\t");
             
-            #line 39 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\ResourceModel.tt"
+            #line 39 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\EnumModel.tt"
 }
             
             #line default
             #line hidden
-            this.Write("    <section class=\"content-wrapper main-content clear-fix\">\r\n\t\t");
+            this.Write("\t<p>Possible enumeration values:</p>\r\n\r\n\t<table class=\"help-page-table\">\r\n\t\t<thea" +
+                    "d>\r\n\t\t\t<tr><th>Name</th><th>Value</th><th>Description</th></tr>\r\n\t\t</thead>\r\n\t\t<" +
+                    "tbody>\r\n\t\t\t");
             
-            #line 41 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\ResourceModel.tt"
-if (Parameters.Count > 0)
-		{ 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t");
-            
-            #line 43 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\ResourceModel.tt"
-var parameters = Parameters;
+            #line 47 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\EnumModel.tt"
+foreach (EnumValueDescription value in Model.Values)
+			{
             
             #line default
             #line hidden
-            this.Write("\t\t\t");
-            this.Write("<table class=\"help-page-table\">\r\n    <thead>\r\n\t\t<tr><th>Name</th><th>Description<" +
-                    "/th><th>Type</th><th>Additional information</th></tr>\r\n    </thead>\r\n    <tbody>" +
-                    "\r\n    ");
+            this.Write("\t\t\t\t<tr>\r\n\t\t\t\t\t<td class=\"enum-name\"><b>");
             
-            #line 6 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
- foreach (var parameter in parameters)
-    {
-		    ModelDescription modelDescription = parameter.TypeDescription;
-		    string parameterDocumentation = parameter.Documentation != null ?
-                parameter.Documentation : "No documentation available.";
-
-        // Don't show CancellationToken because it's a special parameter
-        if (!typeof(CancellationToken).IsAssignableFrom(parameter.TypeDescription.ModelType))
-        { 
+            #line 50 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\EnumModel.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(value.Name));
             
             #line default
             #line hidden
-            this.Write("            <tr>\r\n                <td class=\"parameter-name\"><b>");
+            this.Write("</b></td>\r\n\t\t\t\t\t<td class=\"enum-value\">\r\n\t\t\t\t\t\t<p>");
             
-            #line 16 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
-            
-            #line default
-            #line hidden
-            this.Write("</b></td>\r\n                <td class=\"parameter-documentation\"><pre>");
-            
-            #line 17 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameterDocumentation));
+            #line 52 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\EnumModel.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(value.Value));
             
             #line default
             #line hidden
-            this.Write("</pre></td>\r\n\t\t\t\t        <td>\r\n                    ");
+            this.Write("</p>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t\t<td class=\"enum-description\">\r\n\t\t\t\t\t\t");
             
-            #line 1 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
-{
-  if (modelDescription is ComplexTypeModelDescription || modelDescription is EnumTypeModelDescription)
-  {
-    if (Model.GetType() == typeof(Object))
-    {
-            
-            #line default
-            #line hidden
-            this.Write("      <p>Object</p>\r\n    ");
-            
-            #line 7 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
-}
-    else
-    {
-            
-            #line default
-            #line hidden
-            this.Write("      <a href=\'");
-            
-            #line 10 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ResourceModelLinkFactory("RES-" + modelDescription.Name)));
-            
-            #line default
-            #line hidden
-            this.Write("\'>");
-            
-            #line 10 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(modelDescription.Name));
-            
-            #line default
-            #line hidden
-            this.Write("</a>\r\n    ");
-            
-            #line 11 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
-}
-  }
-  else if (modelDescription is CollectionModelDescription)
-  {
-    var collectionDescription = modelDescription as CollectionModelDescription;
-    var elementDescription = collectionDescription.ElementDescription;
-    modelDescription = elementDescription; 
-            
-            #line default
-            #line hidden
-            this.Write("    ");
-            this.Write("  ");
-            
-            #line 19 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
-}
-  else
-  {
-            
-            #line default
-            #line hidden
-            this.Write("    <p>");
-            
-            #line 22 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(modelDescription.Name));
-            
-            #line default
-            #line hidden
-            this.Write("</p>\r\n  ");
-            
-            #line 23 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
-}
-}
-            
-            #line default
-            #line hidden
-            this.Write("\r\n                </td>\r\n              \r\n                <td>\r\n                  " +
-                    "  ");
-            
-            #line 23 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
-if (parameter.Annotations.Count > 0)
-                    {
-						foreach (var annotation in parameter.Annotations)
-                        {
+            #line 55 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\EnumModel.tt"
+if (value.Documentation != null)
+						{
+						
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t\t\t<p>");
             
-            #line 27 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(annotation.Documentation));
+            #line 58 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\EnumModel.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(value.Documentation));
             
             #line default
             #line hidden
-            this.Write("</p>\r\n                        ");
+            this.Write("</p>\r\n\t\t\t\t\t\t");
             
-            #line 28 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
-}
-                    }
-                    else
-                    {
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t\t\t\t<p>None.</p>\r\n                    ");
-            
-            #line 33 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("                </td>\r\n            </tr>\r\n        ");
-            
-            #line 36 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
- } 
-    } 
-            
-            #line default
-            #line hidden
-            this.Write("    </tbody>\r\n</table>");
-            this.Write("\r\n\t\t");
-            
-            #line 45 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\ResourceModel.tt"
+            #line 59 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\EnumModel.tt"
 
-		}
-		
+						}
+						else
+						{
             
             #line default
             #line hidden
-            this.Write(" \r\n    </section>\r\n</div>\r\n</body>\r\n</html>");
+            this.Write("\t\t\t\t\t\t\t<p>No documentation available.</p>\r\n\t\t\t\t\t\t");
+            
+            #line 64 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\EnumModel.tt"
+}
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\t\t\t");
+            
+            #line 67 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\EnumModel.tt"
+}
+            
+            #line default
+            #line hidden
+            this.Write("\t\t</tbody>\r\n\t</table>\r\n</div>\r\n</body>\r\n</html>");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -295,7 +187,7 @@ if (parameter.Annotations.Count > 0)
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "14.0.0.0")]
-    public class ResourceModelBase
+    public class EnumModelBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

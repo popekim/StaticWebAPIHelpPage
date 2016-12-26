@@ -11,6 +11,6 @@ namespace WebApiHelpPageGenerator
 
         void GenerateApiDetails(HelpPageApiModel apiModel);
 
-        void GenerateResourceModel(HelpPageApiModel modelDescription);
+        void GenerateResourceModel(ModelDescription modelDescription);
     }
 }

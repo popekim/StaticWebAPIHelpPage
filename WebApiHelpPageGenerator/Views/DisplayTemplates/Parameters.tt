@@ -3,7 +3,7 @@
 		<tr><th>Name</th><th>Description</th><th>Type</th><th>Additional information</th></tr>
     </thead>
     <tbody>
-    <# foreach (ParameterDescription parameter in parameters)
+    <# foreach (var parameter in parameters)
     {
 		    ModelDescription modelDescription = parameter.TypeDescription;
 		    string parameterDocumentation = parameter.Documentation != null ?

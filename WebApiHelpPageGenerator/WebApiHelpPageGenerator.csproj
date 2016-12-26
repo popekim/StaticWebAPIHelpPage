@@ -137,6 +137,11 @@
     <Compile Include="SampleGeneration\ObjectGenerator.cs" />
     <Compile Include="SampleGeneration\SampleDirection.cs" />
     <Compile Include="SampleGeneration\TextSample.cs" />
+    <Compile Include="Views\EnumModel.cs">
+      <DependentUpon>EnumModel.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Views\ResourceModel.cs">
       <DependentUpon>ResourceModel.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -154,6 +159,7 @@
       <DependentUpon>Index.tt</DependentUpon>
     </Compile>
     <Compile Include="Views\IndexPartial.cs" />
+    <Compile Include="Views\EnumModelPartial.cs" />
     <Compile Include="Views\ResourceModelPartial.cs" />
     <Compile Include="XmlDocumentationProvider.cs" />
   </ItemGroup>
@@ -181,6 +187,11 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Views\EnumModel.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EnumModel.cs</LastGenOutput>
+      <CustomToolNamespace>WebApiHelpPage</CustomToolNamespace>
+    </None>
     <None Include="Views\DisplayTemplates\ModelDescriptionLink.tt" />
     <None Include="Views\ResourceModel.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

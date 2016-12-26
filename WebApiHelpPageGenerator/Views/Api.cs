@@ -166,7 +166,7 @@ namespace WebApiHelpPage
                     "\r\n    ");
             
             #line 6 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
- foreach (ParameterDescription parameter in parameters)
+ foreach (var parameter in parameters)
     {
 		    ModelDescription modelDescription = parameter.TypeDescription;
 		    string parameterDocumentation = parameter.Documentation != null ?
@@ -365,7 +365,7 @@ var parameters = Model.RequestBodyParameters;
                     "\r\n    ");
             
             #line 6 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
- foreach (ParameterDescription parameter in parameters)
+ foreach (var parameter in parameters)
     {
 		    ModelDescription modelDescription = parameter.TypeDescription;
 		    string parameterDocumentation = parameter.Documentation != null ?
@@ -701,7 +701,7 @@ if (Model.ResourceDescription != null)
                     "\r\n    ");
             
             #line 6 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
- foreach (ParameterDescription parameter in parameters)
+ foreach (var parameter in parameters)
     {
 		    ModelDescription modelDescription = parameter.TypeDescription;
 		    string parameterDocumentation = parameter.Documentation != null ?

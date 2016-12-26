@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Web.Http.Description;
+using WebApiHelpPage.ModelDescriptions;
 using WebApiHelpPage.Models;
 using WebApiHelpPageGenerator;
 
@@ -11,7 +12,8 @@ namespace WebApiJsClientGenerator
         public void GenerateApiDetails(HelpPageApiModel apiModel)
         {
         }
-        public void GenerateResourceModel(HelpPageApiModel modelDescription)
+
+        public void GenerateResourceModel(ModelDescription modelDescription)
         {
         }
 

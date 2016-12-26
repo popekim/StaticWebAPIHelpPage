@@ -37,15 +37,36 @@
 	{#>
 		<p><#=modelDesc.Documentation#></p>
 	<#}#>
-    <section class="content-wrapper main-content clear-fix">
-		<#if (Parameters.Count > 0)
-		{ #>
-			<#var parameters = Parameters;#>
-			<#@ include file="DisplayTemplates\Parameters.tt" #>
-		<#
-		}
-		#> 
-    </section>
+	<p>Possible enumeration values:</p>
+
+	<table class="help-page-table">
+		<thead>
+			<tr><th>Name</th><th>Value</th><th>Description</th></tr>
+		</thead>
+		<tbody>
+			<#foreach (EnumValueDescription value in Model.Values)
+			{#>
+				<tr>
+					<td class="enum-name"><b><#=value.Name#></b></td>
+					<td class="enum-value">
+						<p><#=value.Value#></p>
+					</td>
+					<td class="enum-description">
+						<#if (value.Documentation != null)
+						{
+						#>
+							<p><#=value.Documentation#></p>
+						<#
+						}
+						else
+						{#>
+							<p>No documentation available.</p>
+						<#}#>
+					</td>
+				</tr>
+			<#}#>
+		</tbody>
+	</table>
 </div>
 </body>
 </html>

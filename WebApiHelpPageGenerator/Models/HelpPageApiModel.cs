@@ -84,7 +84,7 @@ namespace WebApiHelpPage.Models
         /// </summary>
         public Collection<string> ErrorMessages { get; private set; }
 
-        private static IList<ParameterDescription> GetParameterDescriptions(ModelDescription modelDescription)
+        internal static IList<ParameterDescription> GetParameterDescriptions(ModelDescription modelDescription)
         {
             ComplexTypeModelDescription complexTypeModelDescription = modelDescription as ComplexTypeModelDescription;
             if (complexTypeModelDescription != null)
