@@ -185,14 +185,14 @@ namespace WebApiHelpPage
             
             #line default
             #line hidden
-            this.Write("</b></td>\r\n                <td class=\"parameter-documentation\"><pre>");
+            this.Write("</b></td>\r\n                <td class=\"parameter-documentation\">");
             
             #line 17 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parameterDocumentation));
             
             #line default
             #line hidden
-            this.Write("</pre></td>\r\n\t\t\t\t        <td>\r\n                    ");
+            this.Write("</td>\r\n\t\t\t\t        <td>\r\n                    ");
             
             #line 1 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
 {
@@ -384,14 +384,14 @@ var parameters = Model.RequestBodyParameters;
             
             #line default
             #line hidden
-            this.Write("</b></td>\r\n                <td class=\"parameter-documentation\"><pre>");
+            this.Write("</b></td>\r\n                <td class=\"parameter-documentation\">");
             
             #line 17 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parameterDocumentation));
             
             #line default
             #line hidden
-            this.Write("</pre></td>\r\n\t\t\t\t        <td>\r\n                    ");
+            this.Write("</td>\r\n\t\t\t\t        <td>\r\n                    ");
             
             #line 1 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
 {
@@ -720,14 +720,14 @@ if (Model.ResourceDescription != null)
             
             #line default
             #line hidden
-            this.Write("</b></td>\r\n                <td class=\"parameter-documentation\"><pre>");
+            this.Write("</b></td>\r\n                <td class=\"parameter-documentation\">");
             
             #line 17 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parameterDocumentation));
             
             #line default
             #line hidden
-            this.Write("</pre></td>\r\n\t\t\t\t        <td>\r\n                    ");
+            this.Write("</td>\r\n\t\t\t\t        <td>\r\n                    ");
             
             #line 1 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
 {

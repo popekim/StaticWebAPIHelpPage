@@ -14,7 +14,7 @@
         { #>
             <tr>
                 <td class="parameter-name"><b><#=parameter.Name#></b></td>
-                <td class="parameter-documentation"><pre><#=parameterDocumentation#></pre></td>
+                <td class="parameter-documentation"><#=parameterDocumentation#></td>
 				        <td>
                     <#@ include file="DisplayTemplates\ModelDescriptionLink.tt" #>
                 </td>
