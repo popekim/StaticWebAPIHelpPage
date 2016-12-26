@@ -13,8 +13,8 @@
         if (!typeof(CancellationToken).IsAssignableFrom(parameter.TypeDescription.ModelType))
         { #>
             <tr>
-                <td><b><#=parameter.Name#></b></td>
-                <td><pre><#=parameterDocumentation#></pre></td>
+                <td class="parameter-name"><b><#=parameter.Name#></b></td>
+                <td class="parameter-documentation"><pre><#=parameterDocumentation#></pre></td>
 				<td><#=modelDescription.Name#></td>
                 <td>
                     <#if (parameter.Annotations.Count > 0)

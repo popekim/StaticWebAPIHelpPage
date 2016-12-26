@@ -178,14 +178,14 @@ namespace WebApiHelpPage
             
             #line default
             #line hidden
-            this.Write("            <tr>\r\n                <td><b>");
+            this.Write("            <tr>\r\n                <td class=\"parameter-name\"><b>");
             
             #line 16 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
             
             #line default
             #line hidden
-            this.Write("</b></td>\r\n                <td><pre>");
+            this.Write("</b></td>\r\n                <td class=\"parameter-documentation\"><pre>");
             
             #line 17 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parameterDocumentation));
@@ -311,14 +311,14 @@ var parameters = Model.RequestBodyParameters;
             
             #line default
             #line hidden
-            this.Write("            <tr>\r\n                <td><b>");
+            this.Write("            <tr>\r\n                <td class=\"parameter-name\"><b>");
             
             #line 16 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
             
             #line default
             #line hidden
-            this.Write("</b></td>\r\n                <td><pre>");
+            this.Write("</b></td>\r\n                <td class=\"parameter-documentation\"><pre>");
             
             #line 17 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parameterDocumentation));
