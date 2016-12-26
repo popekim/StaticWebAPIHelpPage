@@ -70,6 +70,22 @@
 		<p><#=description.ResponseDescription.Documentation#></p>
 	<#
 	}
+	#>
+
+	<#if (Model.ResourceDescription != null)
+    {
+		{#>
+		<#
+			//var modelDescription = Model.ResourceDescription;
+			//@ include file="DisplayTemplates\ModelDescriptionLink.tt"
+		#>
+		<#}
+        if (Model.ResourceProperties != null)
+        {
+			var parameters = Model.ResourceProperties;#>
+            <#@ include file="DisplayTemplates\Parameters.tt" #>
+		<#}
+    }
 	else
 	{#>
 		<p>None.</p>

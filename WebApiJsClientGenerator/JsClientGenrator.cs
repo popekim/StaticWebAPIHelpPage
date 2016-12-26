@@ -11,6 +11,9 @@ namespace WebApiJsClientGenerator
         public void GenerateApiDetails(HelpPageApiModel apiModel)
         {
         }
+        public void GenerateResourceModel(HelpPageApiModel modelDescription)
+        {
+        }
 
         public void GenerateIndex(System.Collections.ObjectModel.Collection<ApiDescription> apis, IDocumentationProvider documentationProvider)
         {

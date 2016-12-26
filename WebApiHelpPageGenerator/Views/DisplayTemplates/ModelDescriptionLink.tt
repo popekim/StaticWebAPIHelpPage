@@ -1,0 +1,24 @@
+<#{
+  if (modelDescription is ComplexTypeModelDescription || modelDescription is EnumTypeModelDescription)
+  {
+    if (Model.GetType() == typeof(Object))
+    {#>
+      <p>Object</p>
+    <#}
+    else
+    {#>
+      <a href='<#=ResourceModelLinkFactory("RES-" + modelDescription.Name)#>'><#=modelDescription.Name#></a>
+    <#}
+  }
+  else if (modelDescription is CollectionModelDescription)
+  {
+    var collectionDescription = modelDescription as CollectionModelDescription;
+    var elementDescription = collectionDescription.ElementDescription;
+    modelDescription = elementDescription; #>
+    <#@ include file="DisplayTemplates\ModelDescriptionLink.tt" #>
+  <#}
+  else
+  {#>
+    <p><#=modelDescription.Name#></p>
+  <#}
+}#>

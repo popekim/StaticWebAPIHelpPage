@@ -168,9 +168,9 @@ namespace WebApiHelpPage
             #line 6 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
  foreach (ParameterDescription parameter in parameters)
     {
-		ModelDescription modelDescription = parameter.TypeDescription;
-		string parameterDocumentation = parameter.Documentation != null ?
-            parameter.Documentation : "No documentation available.";
+		    ModelDescription modelDescription = parameter.TypeDescription;
+		    string parameterDocumentation = parameter.Documentation != null ?
+                parameter.Documentation : "No documentation available.";
 
         // Don't show CancellationToken because it's a special parameter
         if (!typeof(CancellationToken).IsAssignableFrom(parameter.TypeDescription.ModelType))
@@ -192,16 +192,82 @@ namespace WebApiHelpPage
             
             #line default
             #line hidden
-            this.Write("</pre></td>\r\n\t\t\t\t<td>");
+            this.Write("</pre></td>\r\n\t\t\t\t        <td>\r\n                    ");
             
-            #line 18 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
+            #line 1 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
+{
+  if (modelDescription is ComplexTypeModelDescription || modelDescription is EnumTypeModelDescription)
+  {
+    if (Model.GetType() == typeof(Object))
+    {
+            
+            #line default
+            #line hidden
+            this.Write("      <p>Object</p>\r\n    ");
+            
+            #line 7 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
+}
+    else
+    {
+            
+            #line default
+            #line hidden
+            this.Write("      <a href=\'");
+            
+            #line 10 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ResourceModelLinkFactory("RES-" + modelDescription.Name)));
+            
+            #line default
+            #line hidden
+            this.Write("\'>");
+            
+            #line 10 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelDescription.Name));
             
             #line default
             #line hidden
-            this.Write("</td>\r\n                <td>\r\n                    ");
+            this.Write("</a>\r\n    ");
             
-            #line 20 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
+            #line 11 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
+}
+  }
+  else if (modelDescription is CollectionModelDescription)
+  {
+    var collectionDescription = modelDescription as CollectionModelDescription;
+    var elementDescription = collectionDescription.ElementDescription;
+    modelDescription = elementDescription; 
+            
+            #line default
+            #line hidden
+            this.Write("    ");
+            this.Write("  ");
+            
+            #line 19 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
+}
+  else
+  {
+            
+            #line default
+            #line hidden
+            this.Write("    <p>");
+            
+            #line 22 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(modelDescription.Name));
+            
+            #line default
+            #line hidden
+            this.Write("</p>\r\n  ");
+            
+            #line 23 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
+}
+}
+            
+            #line default
+            #line hidden
+            this.Write("\r\n                </td>\r\n              \r\n                <td>\r\n                  " +
+                    "  ");
+            
+            #line 23 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
 if (parameter.Annotations.Count > 0)
                     {
 						foreach (var annotation in parameter.Annotations)
@@ -211,14 +277,14 @@ if (parameter.Annotations.Count > 0)
             #line hidden
             this.Write("\t\t\t\t\t\t\t<p>");
             
-            #line 24 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
+            #line 27 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(annotation.Documentation));
             
             #line default
             #line hidden
             this.Write("</p>\r\n                        ");
             
-            #line 25 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
+            #line 28 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
 }
                     }
                     else
@@ -228,14 +294,14 @@ if (parameter.Annotations.Count > 0)
             #line hidden
             this.Write("\t\t\t\t\t\t<p>None.</p>\r\n                    ");
             
-            #line 30 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
+            #line 33 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
 }
             
             #line default
             #line hidden
             this.Write("                </td>\r\n            </tr>\r\n        ");
             
-            #line 33 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
+            #line 36 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
  } 
     } 
             
@@ -301,9 +367,9 @@ var parameters = Model.RequestBodyParameters;
             #line 6 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
  foreach (ParameterDescription parameter in parameters)
     {
-		ModelDescription modelDescription = parameter.TypeDescription;
-		string parameterDocumentation = parameter.Documentation != null ?
-            parameter.Documentation : "No documentation available.";
+		    ModelDescription modelDescription = parameter.TypeDescription;
+		    string parameterDocumentation = parameter.Documentation != null ?
+                parameter.Documentation : "No documentation available.";
 
         // Don't show CancellationToken because it's a special parameter
         if (!typeof(CancellationToken).IsAssignableFrom(parameter.TypeDescription.ModelType))
@@ -325,16 +391,82 @@ var parameters = Model.RequestBodyParameters;
             
             #line default
             #line hidden
-            this.Write("</pre></td>\r\n\t\t\t\t<td>");
+            this.Write("</pre></td>\r\n\t\t\t\t        <td>\r\n                    ");
             
-            #line 18 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
+            #line 1 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
+{
+  if (modelDescription is ComplexTypeModelDescription || modelDescription is EnumTypeModelDescription)
+  {
+    if (Model.GetType() == typeof(Object))
+    {
+            
+            #line default
+            #line hidden
+            this.Write("      <p>Object</p>\r\n    ");
+            
+            #line 7 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
+}
+    else
+    {
+            
+            #line default
+            #line hidden
+            this.Write("      <a href=\'");
+            
+            #line 10 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ResourceModelLinkFactory("RES-" + modelDescription.Name)));
+            
+            #line default
+            #line hidden
+            this.Write("\'>");
+            
+            #line 10 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(modelDescription.Name));
             
             #line default
             #line hidden
-            this.Write("</td>\r\n                <td>\r\n                    ");
+            this.Write("</a>\r\n    ");
             
-            #line 20 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
+            #line 11 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
+}
+  }
+  else if (modelDescription is CollectionModelDescription)
+  {
+    var collectionDescription = modelDescription as CollectionModelDescription;
+    var elementDescription = collectionDescription.ElementDescription;
+    modelDescription = elementDescription; 
+            
+            #line default
+            #line hidden
+            this.Write("    ");
+            this.Write("  ");
+            
+            #line 19 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
+}
+  else
+  {
+            
+            #line default
+            #line hidden
+            this.Write("    <p>");
+            
+            #line 22 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(modelDescription.Name));
+            
+            #line default
+            #line hidden
+            this.Write("</p>\r\n  ");
+            
+            #line 23 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
+}
+}
+            
+            #line default
+            #line hidden
+            this.Write("\r\n                </td>\r\n              \r\n                <td>\r\n                  " +
+                    "  ");
+            
+            #line 23 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
 if (parameter.Annotations.Count > 0)
                     {
 						foreach (var annotation in parameter.Annotations)
@@ -344,14 +476,14 @@ if (parameter.Annotations.Count > 0)
             #line hidden
             this.Write("\t\t\t\t\t\t\t<p>");
             
-            #line 24 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
+            #line 27 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(annotation.Documentation));
             
             #line default
             #line hidden
             this.Write("</p>\r\n                        ");
             
-            #line 25 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
+            #line 28 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
 }
                     }
                     else
@@ -361,14 +493,14 @@ if (parameter.Annotations.Count > 0)
             #line hidden
             this.Write("\t\t\t\t\t\t<p>None.</p>\r\n                    ");
             
-            #line 30 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
+            #line 33 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
 }
             
             #line default
             #line hidden
             this.Write("                </td>\r\n            </tr>\r\n        ");
             
-            #line 33 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
+            #line 36 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
  } 
     } 
             
@@ -530,6 +662,192 @@ if (parameter.Annotations.Count > 0)
             #line 71 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\HelpPageApiModel.tt"
 
 	}
+	
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t");
+            
+            #line 75 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\HelpPageApiModel.tt"
+if (Model.ResourceDescription != null)
+    {
+		{
+            
+            #line default
+            #line hidden
+            this.Write("\t\t");
+            
+            #line 78 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\HelpPageApiModel.tt"
+
+			//var modelDescription = Model.ResourceDescription;
+			//@ include file="DisplayTemplates\ModelDescriptionLink.tt"
+		
+            
+            #line default
+            #line hidden
+            this.Write("\t\t");
+            
+            #line 82 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\HelpPageApiModel.tt"
+}
+        if (Model.ResourceProperties != null)
+        {
+			var parameters = Model.ResourceProperties;
+            
+            #line default
+            #line hidden
+            this.Write("            ");
+            this.Write("<table class=\"help-page-table\">\r\n    <thead>\r\n\t\t<tr><th>Name</th><th>Description<" +
+                    "/th><th>Type</th><th>Additional information</th></tr>\r\n    </thead>\r\n    <tbody>" +
+                    "\r\n    ");
+            
+            #line 6 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
+ foreach (ParameterDescription parameter in parameters)
+    {
+		    ModelDescription modelDescription = parameter.TypeDescription;
+		    string parameterDocumentation = parameter.Documentation != null ?
+                parameter.Documentation : "No documentation available.";
+
+        // Don't show CancellationToken because it's a special parameter
+        if (!typeof(CancellationToken).IsAssignableFrom(parameter.TypeDescription.ModelType))
+        { 
+            
+            #line default
+            #line hidden
+            this.Write("            <tr>\r\n                <td class=\"parameter-name\"><b>");
+            
+            #line 16 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
+            
+            #line default
+            #line hidden
+            this.Write("</b></td>\r\n                <td class=\"parameter-documentation\"><pre>");
+            
+            #line 17 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(parameterDocumentation));
+            
+            #line default
+            #line hidden
+            this.Write("</pre></td>\r\n\t\t\t\t        <td>\r\n                    ");
+            
+            #line 1 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
+{
+  if (modelDescription is ComplexTypeModelDescription || modelDescription is EnumTypeModelDescription)
+  {
+    if (Model.GetType() == typeof(Object))
+    {
+            
+            #line default
+            #line hidden
+            this.Write("      <p>Object</p>\r\n    ");
+            
+            #line 7 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
+}
+    else
+    {
+            
+            #line default
+            #line hidden
+            this.Write("      <a href=\'");
+            
+            #line 10 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ResourceModelLinkFactory("RES-" + modelDescription.Name)));
+            
+            #line default
+            #line hidden
+            this.Write("\'>");
+            
+            #line 10 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(modelDescription.Name));
+            
+            #line default
+            #line hidden
+            this.Write("</a>\r\n    ");
+            
+            #line 11 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
+}
+  }
+  else if (modelDescription is CollectionModelDescription)
+  {
+    var collectionDescription = modelDescription as CollectionModelDescription;
+    var elementDescription = collectionDescription.ElementDescription;
+    modelDescription = elementDescription; 
+            
+            #line default
+            #line hidden
+            this.Write("    ");
+            this.Write("  ");
+            
+            #line 19 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
+}
+  else
+  {
+            
+            #line default
+            #line hidden
+            this.Write("    <p>");
+            
+            #line 22 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(modelDescription.Name));
+            
+            #line default
+            #line hidden
+            this.Write("</p>\r\n  ");
+            
+            #line 23 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\ModelDescriptionLink.tt"
+}
+}
+            
+            #line default
+            #line hidden
+            this.Write("\r\n                </td>\r\n              \r\n                <td>\r\n                  " +
+                    "  ");
+            
+            #line 23 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
+if (parameter.Annotations.Count > 0)
+                    {
+						foreach (var annotation in parameter.Annotations)
+                        {
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\t\t\t\t<p>");
+            
+            #line 27 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(annotation.Documentation));
+            
+            #line default
+            #line hidden
+            this.Write("</p>\r\n                        ");
+            
+            #line 28 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
+}
+                    }
+                    else
+                    {
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\t\t\t<p>None.</p>\r\n                    ");
+            
+            #line 33 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
+}
+            
+            #line default
+            #line hidden
+            this.Write("                </td>\r\n            </tr>\r\n        ");
+            
+            #line 36 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\Parameters.tt"
+ } 
+    } 
+            
+            #line default
+            #line hidden
+            this.Write("    </tbody>\r\n</table>");
+            this.Write("\r\n\t\t");
+            
+            #line 87 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\HelpPageApiModel.tt"
+}
+    }
 	else
 	{
             
@@ -537,7 +855,7 @@ if (parameter.Annotations.Count > 0)
             #line hidden
             this.Write("\t\t<p>None.</p>\r\n\t");
             
-            #line 76 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\HelpPageApiModel.tt"
+            #line 92 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\HelpPageApiModel.tt"
 
 	}
             
@@ -545,7 +863,7 @@ if (parameter.Annotations.Count > 0)
             #line hidden
             this.Write("    \r\n\t");
             
-            #line 79 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\HelpPageApiModel.tt"
+            #line 95 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\HelpPageApiModel.tt"
 
 	if (hasResponseSamples)
     { 
@@ -554,7 +872,7 @@ if (parameter.Annotations.Count > 0)
             #line hidden
             this.Write("     \r\n\t\t");
             
-            #line 82 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\HelpPageApiModel.tt"
+            #line 98 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\HelpPageApiModel.tt"
  var ModelSamples = Model.SampleResponses; 
             
             #line default
@@ -658,7 +976,7 @@ if (parameter.Annotations.Count > 0)
             this.Write("</div>");
             this.Write("\r\n    ");
             
-            #line 84 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\HelpPageApiModel.tt"
+            #line 100 "C:\dev\StaticWebAPIHelpPage\WebApiHelpPageGenerator\Views\DisplayTemplates\HelpPageApiModel.tt"
  }
             
             #line default

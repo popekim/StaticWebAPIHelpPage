@@ -1,4 +1,5 @@
-﻿using System.Web.Http.Description;
+﻿using System;
+using System.Web.Http.Description;
 using WebApiHelpPage.Models;
 
 namespace WebApiHelpPage
@@ -9,5 +10,6 @@ namespace WebApiHelpPage
 
         public string HomePageLink { get; set; }
         public IDocumentationProvider DocumentationProvider { get; set; }
+        public Func<string, string> ResourceModelLinkFactory { get; set; }
     }
 }

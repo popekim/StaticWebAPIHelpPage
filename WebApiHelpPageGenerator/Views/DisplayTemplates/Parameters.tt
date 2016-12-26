@@ -5,9 +5,9 @@
     <tbody>
     <# foreach (ParameterDescription parameter in parameters)
     {
-		ModelDescription modelDescription = parameter.TypeDescription;
-		string parameterDocumentation = parameter.Documentation != null ?
-            parameter.Documentation : "No documentation available.";
+		    ModelDescription modelDescription = parameter.TypeDescription;
+		    string parameterDocumentation = parameter.Documentation != null ?
+                parameter.Documentation : "No documentation available.";
 
         // Don't show CancellationToken because it's a special parameter
         if (!typeof(CancellationToken).IsAssignableFrom(parameter.TypeDescription.ModelType))
@@ -15,7 +15,10 @@
             <tr>
                 <td class="parameter-name"><b><#=parameter.Name#></b></td>
                 <td class="parameter-documentation"><pre><#=parameterDocumentation#></pre></td>
-				<td><#=modelDescription.Name#></td>
+				        <td>
+                    <#@ include file="DisplayTemplates\ModelDescriptionLink.tt" #>
+                </td>
+              
                 <td>
                     <#if (parameter.Annotations.Count > 0)
                     {

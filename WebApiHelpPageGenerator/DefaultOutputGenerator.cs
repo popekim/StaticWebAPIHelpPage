@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Web.Http.Description;
 using WebApiHelpPage;
+using WebApiHelpPage.ModelDescriptions;
 using WebApiHelpPage.Models;
 
 namespace WebApiHelpPageGenerator
@@ -32,9 +33,25 @@ namespace WebApiHelpPageGenerator
             {
                 Model = apiModel,
                 HomePageLink = fileName,
+                ResourceModelLinkFactory = resourceModelName =>
+                {
+                    return resourceModelName + ".html";
+                }
             };
             string helpPage = apiTemplate.TransformText();
             WriteFile(apiModel.ApiDescription.GetFriendlyId() + ".html", helpPage);
+        }
+
+        public void GenerateResourceModel(HelpPageApiModel apiModel)
+        {
+            var resourceModelTemplate = new ResourceModel
+            {
+                Model = apiModel,
+                HomePageLink = fileName,
+            };
+
+            string helpPage = resourceModelTemplate.TransformText();
+            WriteFile($"RES-{apiModel.ResourceDescription.Name}.html", helpPage);
         }
 
         private static void WriteFile(string fileName, String pageContent)
